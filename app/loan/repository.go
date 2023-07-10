@@ -4,13 +4,17 @@ import "gorm.io/gorm"
 
 const CONTEXT_NAME = "loan-repo"
 
+//Repository is responsible to manage loan and loan valus in database
 type Repository interface {
+	//Create a new loan in the database
 	Create(newLoan *Loan) error
+	//Find and retrieve a loan by its ID
 	FindByID(id string) (*Loan, error)
+	//Find all loans
 	FindAll() ([]Loan, error)
-	PayInstallment(loanId string, installmentId uint64) error
 }
 
+//Return a new instance of the repository
 func NewRepository(db *gorm.DB) Repository {
 	return &repository{
 		db: db,
@@ -55,13 +59,4 @@ func (r *repository) FindAll() ([]Loan, error) {
 	}
 
 	return loans, nil
-}
-
-func (r *repository) PayInstallment(loanId string, installmentId uint64) error {
-
-	if err := r.db.Model(&LoanValue{}).Where("id = ? AND loan_id = ?", installmentId, loanId).Update("paid", true).Error; err != nil {
-		return err
-	}
-
-	return nil
 }

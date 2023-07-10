@@ -52,6 +52,7 @@ func (l LocalDate) Value() (driver.Value, error) {
 	return driver.Value(time.Time(l)), nil
 }
 
+// Strusct that holds the loan data
 type Loan struct {
 	Id             *string     `json:"id" gorm:"column:id;primarykey;default:gen_random_uuid()"`
 	Method         int         `json:"method" gorm:"column:method"`
@@ -64,6 +65,7 @@ type Loan struct {
 	Values         []LoanValue `json:"values,omitempty" gorm:"foreignKey:LoanId"`
 }
 
+// Transform the loan values to the loan-calculator parameters format
 func (l *Loan) toLoanCalcParameters() loancalculator.CalculationParameters {
 
 	params := loancalculator.CalculationParameters{
@@ -78,6 +80,7 @@ func (l *Loan) toLoanCalcParameters() loancalculator.CalculationParameters {
 	return params
 }
 
+// Struct that holds the loan values data
 type LoanValue struct {
 	Id           *uint64   `json:"id,omitempty" gorm:"column:id;type:bigserial;autoIncrement"`
 	LoanId       *string   `json:"-" gorm:"column:loan_id"`
@@ -87,9 +90,9 @@ type LoanValue struct {
 	Interest     float64   `json:"interest" gorm:"column:interest"`
 	Amortization float64   `json:"amortization" gorm:"column:amortization"`
 	Balance      float64   `json:"balance" gorm:"column:balance"`
-	Paid         *bool     `json:"paid,omitempty" gorm:"column:paid;default:false"`
 }
 
+// Convert the value from the loan-calculator library format
 func convertCalculatedValue(value loancalculator.Value) LoanValue {
 
 	return LoanValue{

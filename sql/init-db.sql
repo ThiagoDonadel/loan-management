@@ -1,7 +1,3 @@
-create table teste (
-    t1 varchar(50)
-);
-
 CREATE TABLE IF NOT EXISTS loans
 (
     id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -12,10 +8,9 @@ CREATE TABLE IF NOT EXISTS loans
     term integer,
     start_date date,
     sign_date timestamp without time zone
-)
+);
 
-
-CREATE TABLE loan_values (
+CREATE TABLE IF NOT EXISTS loan_values (
 	id bigserial NOT NULL PRIMARY KEY,
 	loan_id uuid NOT NULL REFERENCES loans(id),
 	installment_number int,
@@ -23,6 +18,5 @@ CREATE TABLE loan_values (
 	installment numeric(32,2),
 	interest numeric(32,2),
 	amortization numeric(32,2),
-	balance numeric(32,2),
-	paid bool DEFAULT false
-)
+	balance numeric(32,2)
+);

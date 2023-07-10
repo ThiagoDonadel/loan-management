@@ -4,17 +4,20 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
-	"strconv"
 
 	"github.com/ThiagoDonadel/loan-management/app/defaults"
 	"github.com/gin-gonic/gin"
 )
 
+// Controller is responsible to manage the web logic of loans
 type Controller interface {
+	//Simulates a new Loan. This method will only calculate the valus and return
 	Simulate(context *gin.Context)
+	//Calculate and creates a new loan
 	Contract(context *gin.Context)
-	Pay(context *gin.Context)
+	//Find a loan by its ID
 	Find(context *gin.Context)
+	//Find all loans
 	FIndAll(context *gin.Context)
 	defaults.GinController
 }
@@ -44,14 +47,6 @@ func (c *controller) Contract(context *gin.Context) {
 	values, _ := c.service.Contract(*params)
 
 	context.JSON(http.StatusOK, values)
-}
-
-func (c *controller) Pay(context *gin.Context) {
-
-	installmentId, _ := strconv.ParseUint(context.Param("installmentId"), 10, 64)
-
-	c.service.Pay(context.Param("id"), installmentId)
-
 }
 
 func (c *controller) Find(context *gin.Context) {
@@ -84,7 +79,6 @@ func (c *controller) FIndAll(context *gin.Context) {
 func (c *controller) SetupRoutes(routerGroup *gin.RouterGroup) {
 	routerGroup.POST("/simulate/", c.Simulate)
 	routerGroup.POST("/contract/", c.Contract)
-	routerGroup.POST("/pay/:id/:installmentId", c.Pay)
 	routerGroup.GET("/find/:id/", c.Find)
 	routerGroup.GET("/find-all/", c.FIndAll)
 

@@ -10,12 +10,16 @@ var (
 	ErrLoanNotFound = errors.New("loan not found")
 )
 
+// Service is responsible to manage the bussines logic of loans
 type Service interface {
+	//Simulates a new Loan. This method will only calculate the valus and return
 	Simulate(loan Loan) ([]LoanValue, error)
+	//Calculate and creates a new loan
 	Contract(loan Loan) (*Loan, error)
+	//Find a loan by its ID
 	Find(id string) (*Loan, error)
+	//Find all loans
 	FindAll() ([]Loan, error)
-	Pay(id string, installmentId uint64) error
 }
 
 type service struct {
@@ -67,10 +71,6 @@ func (s *service) calculate(loan Loan) ([]LoanValue, error) {
 
 	for _, calculatedValue := range calculatedValues {
 		value := convertCalculatedValue(*calculatedValue)
-		if value.Number == 0 {
-			tBool := true
-			value.Paid = &tBool
-		}
 		values = append(values, value)
 	}
 
@@ -94,8 +94,4 @@ func (s *service) Find(id string) (*Loan, error) {
 
 func (s *service) FindAll() ([]Loan, error) {
 	return s.repo.FindAll()
-}
-
-func (s *service) Pay(id string, installmentId uint64) error {
-	return s.repo.PayInstallment(id, installmentId)
 }
