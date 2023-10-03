@@ -17,9 +17,9 @@ type Service interface {
 	//Calculate and creates a new loan
 	Contract(loan Loan) (*Loan, error)
 	//Find a loan by its ID
-	Find(id string) (*Loan, error)
+	Find(id, ownerId string) (*Loan, error)
 	//Find all loans
-	FindAll() ([]Loan, error)
+	FindAll(ownerId string) ([]Loan, error)
 }
 
 type service struct {
@@ -77,9 +77,9 @@ func (s *service) calculate(loan Loan) ([]LoanValue, error) {
 	return values, nil
 }
 
-func (s *service) Find(id string) (*Loan, error) {
+func (s *service) Find(id, ownerId string) (*Loan, error) {
 
-	foundLoan, err := s.repo.FindByID(id)
+	foundLoan, err := s.repo.FindByID(id, ownerId)
 
 	if err != nil {
 		return nil, err
@@ -92,6 +92,6 @@ func (s *service) Find(id string) (*Loan, error) {
 	return foundLoan, nil
 }
 
-func (s *service) FindAll() ([]Loan, error) {
-	return s.repo.FindAll()
+func (s *service) FindAll(ownerId string) ([]Loan, error) {
+	return s.repo.FindAll(ownerId)
 }

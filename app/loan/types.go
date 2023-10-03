@@ -55,6 +55,7 @@ func (l LocalDate) Value() (driver.Value, error) {
 // Strusct that holds the loan data
 type Loan struct {
 	Id             *string     `json:"id" gorm:"column:id;primarykey;default:gen_random_uuid()"`
+	OwnerId        string      `json:"-" gorm:"column:owner_id"`
 	Method         int         `json:"method" gorm:"column:method"`
 	LoanValue      float64     `json:"value" gorm:"column:loan_value"`
 	Rate           float64     `json:"rate" gorm:"column:rate"`
@@ -84,6 +85,7 @@ func (l *Loan) toLoanCalcParameters() loancalculator.CalculationParameters {
 type LoanValue struct {
 	Id           *uint64   `json:"id,omitempty" gorm:"column:id;type:bigserial;autoIncrement"`
 	LoanId       *string   `json:"-" gorm:"column:loan_id"`
+	OwnerId      string    `json:"-" gorm:"column:owner_id"`
 	Number       int       `json:"installment_number" gorm:"column:installment_number"`
 	PaymentDate  LocalDate `json:"payment_date" gorm:"column:payment_date;type:time"`
 	Installment  float64   `json:"installment" gorm:"column:installment"`

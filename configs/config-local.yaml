@@ -1,0 +1,13 @@
+web:
+  port: 8080
+database:
+  user: root 
+  password: root 
+  dbname: loan_db 
+  port: 5432
+security:
+  keycloak:
+    hostname: http://localhost:8989
+    client-id : b30cb230-7a0f-4a60-81e1-4f47d2e33b6a
+    client-secret: Ki6pswmCUf5KQhEpFMmfDTsiy8siiGT2
+    realm: loan

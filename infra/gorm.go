@@ -3,6 +3,7 @@ package infra
 import (
 	"fmt"
 
+	"github.com/spf13/viper"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -11,10 +12,16 @@ var DBConnection *gorm.DB
 
 func ConnectToDatabase() error {
 
-	DSN := "user=%v password=%v dbname=%v port=%v sslmode=disable"
+	DSN := fmt.Sprintf(
+		"user=%v password=%v dbname=%v port=%v sslmode=disable",
+		viper.GetString("database.user"),
+		viper.GetString("database.password"),
+		viper.GetString("database.dbname"),
+		viper.GetString("database.port"),
+	)
 
 	config := postgres.Config{
-		DSN:                  fmt.Sprintf(DSN, "root", "root", "loan_db", "5432"),
+		DSN:                  DSN,
 		PreferSimpleProtocol: true,
 	}
 

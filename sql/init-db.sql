@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS loans
 (
     id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    owner_id uuid NOT NULL,
     method integer,
     loan_value numeric(32,2),
     rate numeric(16,8),
@@ -13,6 +14,7 @@ CREATE TABLE IF NOT EXISTS loans
 CREATE TABLE IF NOT EXISTS loan_values (
 	id bigserial NOT NULL PRIMARY KEY,
 	loan_id uuid NOT NULL REFERENCES loans(id),
+    owner_id uuid NOT NULL,
 	installment_number int,
 	payment_date date,
 	installment numeric(32,2),

@@ -9,9 +9,9 @@ type Repository interface {
 	//Create a new loan in the database
 	Create(newLoan *Loan) error
 	//Find and retrieve a loan by its ID
-	FindByID(id string) (*Loan, error)
+	FindByID(id, ownerId string) (*Loan, error)
 	//Find all loans
-	FindAll() ([]Loan, error)
+	FindAll(ownerId string) ([]Loan, error)
 }
 
 //Return a new instance of the repository
@@ -34,7 +34,7 @@ func (r *repository) Create(newLoan *Loan) error {
 	return nil
 }
 
-func (r *repository) FindByID(id string) (*Loan, error) {
+func (r *repository) FindByID(id, ownerId string) (*Loan, error) {
 
 	foundLoan := &Loan{}
 
@@ -42,7 +42,7 @@ func (r *repository) FindByID(id string) (*Loan, error) {
 		return db.Order("payment_date")
 	})
 
-	if err := preload.First(foundLoan, "id = ?", id).Error; err != nil {
+	if err := preload.First(foundLoan, "id = ? and owner_id = ?", id, ownerId).Error; err != nil {
 		return nil, err
 	}
 
@@ -50,11 +50,11 @@ func (r *repository) FindByID(id string) (*Loan, error) {
 
 }
 
-func (r *repository) FindAll() ([]Loan, error) {
+func (r *repository) FindAll(ownerId string) ([]Loan, error) {
 
 	loans := []Loan{}
 
-	if err := r.db.Find(&loans).Error; err != nil {
+	if err := r.db.Where("owner_id = ?", ownerId).Find(&loans).Error; err != nil {
 		return nil, err
 	}
 

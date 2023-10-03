@@ -1,11 +1,14 @@
 package infra
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
+	"github.com/ThiagoDonadel/loan-management/app/defaults"
 	"github.com/ThiagoDonadel/loan-management/app/registry"
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 )
 
 var ginServer *gin.Engine
@@ -14,10 +17,17 @@ func StartGinServer() {
 	ginServer = gin.Default()
 	defineRoutes()
 
-	log.Fatal(http.ListenAndServe(":8080", ginServer))
+	port := fmt.Sprintf(":%v", viper.Get("web.port"))
+
+	log.Fatal(http.ListenAndServe(port, ginServer))
 }
 
 func defineRoutes() {
 	routeGroup := ginServer.Group("/funding-calculator")
-	registry.LoanController.SetupRoutes(routeGroup)
+
+	unauthorized := routeGroup.Group("")
+	ownerAuthorized := routeGroup.Group("/:" + defaults.OWNER_ID_PARAM_NAME)
+	ownerAuthorized.Use(Authenticate())
+
+	registry.LoanController.SetupRoutes(unauthorized, ownerAuthorized)
 }

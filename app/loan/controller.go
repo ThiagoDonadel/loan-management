@@ -2,7 +2,6 @@ package loan
 
 import (
 	"errors"
-	"fmt"
 	"net/http"
 
 	"github.com/ThiagoDonadel/loan-management/app/defaults"
@@ -33,8 +32,11 @@ type controller struct {
 func (c *controller) Simulate(context *gin.Context) {
 
 	params := &Loan{}
-	err := context.ShouldBindJSON(params)
-	fmt.Println(err)
+
+	if err := context.ShouldBindJSON(params); err != nil {
+		context.JSON(http.StatusInternalServerError, err.Error())
+	}
+
 	values, _ := c.service.Simulate(*params)
 
 	context.JSON(http.StatusOK, values)
@@ -42,8 +44,12 @@ func (c *controller) Simulate(context *gin.Context) {
 
 func (c *controller) Contract(context *gin.Context) {
 	params := &Loan{}
-	err := context.ShouldBindJSON(params)
-	fmt.Println(err)
+
+	if err := context.ShouldBindJSON(params); err != nil {
+		context.JSON(http.StatusInternalServerError, err.Error())
+	}
+
+	params.OwnerId = context.Param(defaults.OWNER_ID_PARAM_NAME)
 	values, _ := c.service.Contract(*params)
 
 	context.JSON(http.StatusOK, values)
@@ -51,7 +57,7 @@ func (c *controller) Contract(context *gin.Context) {
 
 func (c *controller) Find(context *gin.Context) {
 
-	loanFound, err := c.service.Find(context.Param("id"))
+	loanFound, err := c.service.Find(context.Param(defaults.RESOURCE_ID_PARAM_NAME), context.Param(defaults.OWNER_ID_PARAM_NAME))
 
 	if err != nil {
 		if errors.Is(err, ErrLoanNotFound) {
@@ -67,7 +73,7 @@ func (c *controller) Find(context *gin.Context) {
 
 func (c *controller) FIndAll(context *gin.Context) {
 
-	loans, err := c.service.FindAll()
+	loans, err := c.service.FindAll(context.Param(defaults.OWNER_ID_PARAM_NAME))
 
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, err.Error())
@@ -76,10 +82,9 @@ func (c *controller) FIndAll(context *gin.Context) {
 	context.JSON(http.StatusOK, loans)
 }
 
-func (c *controller) SetupRoutes(routerGroup *gin.RouterGroup) {
-	routerGroup.POST("/simulate/", c.Simulate)
-	routerGroup.POST("/contract/", c.Contract)
-	routerGroup.GET("/find/:id/", c.Find)
-	routerGroup.GET("/find-all/", c.FIndAll)
-
+func (c *controller) SetupRoutes(unauthorized, ownerAuthorized *gin.RouterGroup) {
+	ownerAuthorized.POST("/simulate/", c.Simulate)
+	ownerAuthorized.POST("/contract/", c.Contract)
+	ownerAuthorized.GET("/find/:"+defaults.RESOURCE_ID_PARAM_NAME+"/", c.Find)
+	ownerAuthorized.GET("/find-all/", c.FIndAll)
 }
