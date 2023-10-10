@@ -6,11 +6,14 @@ import (
 	"github.com/spf13/viper"
 )
 
-func init() {
+func InitEnv() {
 
-	//get profile for configuration
+	//bind env variables and default values for then
 	viper.SetDefault("profile", "local")
-	viper.BindEnv("profile", "MY_PROFILE")
+	viper.BindEnv("profile", "LOAN_API_CONFIG_PROFILE")
+
+	viper.SetDefault("config-profile", "../configs")
+	viper.BindEnv("config-profile", "LOAN_API_CONFIG_FOLDER")
 
 }
 
@@ -20,12 +23,11 @@ func LoadConfigurationFromFile() error {
 
 	viper.SetConfigName(configFile)
 	viper.SetConfigType("yaml")
-	viper.AddConfigPath("./configs")
+	viper.AddConfigPath(viper.GetString("config-profile"))
 
 	if err := viper.ReadInConfig(); err != nil {
 		return err
 	}
 
 	return nil
-
 }

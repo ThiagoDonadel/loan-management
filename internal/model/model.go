@@ -1,4 +1,4 @@
-package loan
+package model
 
 import (
 	"database/sql/driver"
@@ -9,10 +9,6 @@ import (
 	"time"
 
 	loancalculator "github.com/ThiagoDonadel/loan-calculator"
-)
-
-var (
-	ErrInvalidDateFormat = errors.New("invalid date format")
 )
 
 // Type used customize the time format
@@ -67,7 +63,7 @@ type Loan struct {
 }
 
 // Transform the loan values to the loan-calculator parameters format
-func (l *Loan) toLoanCalcParameters() loancalculator.CalculationParameters {
+func (l *Loan) ToLoanCalcParameters() loancalculator.CalculationParameters {
 
 	params := loancalculator.CalculationParameters{
 		Method:         loancalculator.CalculationMethod(l.Method),
@@ -95,7 +91,7 @@ type LoanValue struct {
 }
 
 // Convert the value from the loan-calculator library format
-func convertCalculatedValue(value loancalculator.Value) LoanValue {
+func ConvertCalculatedValue(value loancalculator.Value) LoanValue {
 
 	return LoanValue{
 		Number:       value.Number,

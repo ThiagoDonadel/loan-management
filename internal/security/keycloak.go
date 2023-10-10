@@ -1,11 +1,11 @@
-package infra
+package security
 
 import (
 	"net/http"
 	"strings"
 
 	"github.com/Nerzal/gocloak/v13"
-	"github.com/ThiagoDonadel/loan-management/app/defaults"
+	"github.com/ThiagoDonadel/loan-management/internal/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 )
@@ -36,7 +36,7 @@ func Authenticate() gin.HandlerFunc {
 		}
 
 		userToken := (*claims)["sub"].(string)
-		userRequest := ctx.Param(defaults.OWNER_ID_PARAM_NAME)
+		userRequest := ctx.Param(utils.OWNER_ID_PARAM_NAME)
 
 		if userToken != userRequest {
 			roles := (*claims)["realm_access"].(map[string]any)["roles"].([]any)

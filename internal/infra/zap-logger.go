@@ -7,7 +7,7 @@ import (
 
 var Logger *zap.SugaredLogger
 
-func init() {
+func InitlializeLogger() {
 
 	if viper.Get("profile") == "local" {
 		logger, _ := zap.NewDevelopment()

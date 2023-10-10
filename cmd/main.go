@@ -1,11 +1,15 @@
 package main
 
 import (
-	"github.com/ThiagoDonadel/loan-management/app/registry"
-	"github.com/ThiagoDonadel/loan-management/infra"
+	"github.com/ThiagoDonadel/loan-management/internal/infra"
+	"github.com/ThiagoDonadel/loan-management/internal/registry"
+	"github.com/ThiagoDonadel/loan-management/internal/web"
 )
 
 func main() {
+
+	infra.InitEnv()
+	infra.InitlializeLogger()
 
 	infra.Logger.Info("INICIALIZANDO")
 
@@ -26,5 +30,5 @@ func main() {
 	infra.Logger.Info("dependency injection initialized.")
 
 	infra.Logger.Info("starting web server.")
-	infra.StartGinServer()
+	web.StartGinServer(registry.GetControllers())
 }
