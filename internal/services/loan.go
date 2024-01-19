@@ -2,6 +2,7 @@ package services
 
 import (
 	loancalculator "github.com/ThiagoDonadel/loan-calculator"
+	"github.com/ThiagoDonadel/loan-management/internal/metrics"
 	"github.com/ThiagoDonadel/loan-management/internal/model"
 	"github.com/ThiagoDonadel/loan-management/internal/repository"
 )
@@ -35,6 +36,8 @@ func (s *loanService) Simulate(loan model.Loan) ([]model.LoanValue, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	metrics.IncrementSimulatedAmmountCounter(loan.LoanValue)
 
 	return values, nil
 }

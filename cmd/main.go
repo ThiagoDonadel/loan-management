@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/ThiagoDonadel/loan-management/internal/infra"
+	"github.com/ThiagoDonadel/loan-management/internal/metrics"
 	"github.com/ThiagoDonadel/loan-management/internal/registry"
-	"github.com/ThiagoDonadel/loan-management/internal/web"
 )
 
 func main() {
@@ -19,6 +19,8 @@ func main() {
 	}
 	infra.Logger.Info("configurations initialized.")
 
+	metrics.RegisterMetrics()
+
 	infra.Logger.Info("initializing database connection.")
 	if err := infra.ConnectToDatabase(); err != nil {
 		infra.Logger.Fatal(err)
@@ -30,5 +32,5 @@ func main() {
 	infra.Logger.Info("dependency injection initialized.")
 
 	infra.Logger.Info("starting web server.")
-	web.StartGinServer(registry.GetControllers())
+	infra.StartGinServer(registry.GetControllers())
 }

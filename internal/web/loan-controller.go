@@ -20,7 +20,7 @@ type LoanController interface {
 	Find(context *gin.Context)
 	//Find all loans
 	FIndAll(context *gin.Context)
-	GinController
+	model.BaseController
 }
 
 func NewLoanController(service services.LoanService) LoanController {

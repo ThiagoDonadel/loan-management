@@ -1,6 +1,7 @@
 package registry
 
 import (
+	"github.com/ThiagoDonadel/loan-management/internal/model"
 	"github.com/ThiagoDonadel/loan-management/internal/repository"
 	"github.com/ThiagoDonadel/loan-management/internal/services"
 	"github.com/ThiagoDonadel/loan-management/internal/web"
@@ -37,6 +38,6 @@ func Initialialize(db *gorm.DB) {
 	initializeControllers()
 }
 
-func GetControllers() []web.GinController {
-	return []web.GinController{LoanController}
+func GetControllers() []model.BaseController {
+	return []model.BaseController{LoanController}
 }
