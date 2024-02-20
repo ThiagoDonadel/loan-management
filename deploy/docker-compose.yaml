@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   db:
-    image: postgres
+    image: postgres:16.1
     restart: always
     environment:
       POSTGRES_USER: root
@@ -15,7 +15,7 @@ services:
       - ./sql:/docker-entrypoint-initdb.d
 
   pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:8.2
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
@@ -28,6 +28,7 @@ services:
   keycloak:
       container_name: keycloak
       image: quay.io/keycloak/keycloak:22.0.4
+      restart: always
       environment:
         - KEYCLOAK_ADMIN=admin
         - KEYCLOAK_ADMIN_PASSWORD=admin

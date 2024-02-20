@@ -1,0 +1,395 @@
+{
+	"info": {
+		"_postman_id": "052cfee2-2744-48ef-af5b-a01120977ff2",
+		"name": "Loan API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4488096"
+	},
+	"item": [
+		{
+			"name": "Simulate",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaMi10YzlrUUtEb3VZU2xqM25HZENza0dWOXo1c2pEaUVaM0VUWjJCTlpJIn0.eyJleHAiOjE2OTY4NjMyNDQsImlhdCI6MTY5Njg2Mjk0NCwianRpIjoiNzEzMmZlNjEtNWE1Yi00YTAwLWJmMGEtZTUyMWI4NTFkNjliIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4OTg5L3JlYWxtcy9sb2FuIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImI3ZjE1ODE0LTI3NmEtNDM1Mi04ZTNhLTViOGM4MWY1MDY4NSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImE4ZDI1NDhkLWY1YTgtNGEwMi1iMTgxLTRlMWY0ZTc4ZDZjNSIsInNlc3Npb25fc3RhdGUiOiIxNDAzMDJhMi02YTRkLTQyMzgtOWIyMS1lMTUzMjNmYmUxNzIiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1sb2FuIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiIxNDAzMDJhMi02YTRkLTQyMzgtOWIyMS1lMTUzMjNmYmUxNzIiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IlRlc3RlIFRlc3RlIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdCIsImdpdmVuX25hbWUiOiJUZXN0ZSIsImZhbWlseV9uYW1lIjoiVGVzdGUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20ifQ.XqZzaFqmg075ij9VJqVyamPuGknaIC5U-ktXq3KsCQURLrynWMB_bOurjTbWk-5hsnLX7hGq61pHcqLaLixRGwpeV3m5z8sL2UmhxSvoPk_PzQRzM-afJxu8sRku2IdPw9hHRB7QL6JWeBS2IbJiG2ELWad56NRU1MU9NbyzeRHgF1ewCeV5oy_YWxRhEeJDJoAVLE3dJEu72ECWgz77zr_5S09ZxfMsonIf7gME34DmAtALVBrg3BKf7uo8s2nnTznRYPkzCRucbgcPIHU-5tkk9CGDzI0IORit9SfY0282RLViQ5CAtYKFziYmhHULJEs4gIMLIpg2fjFDsrdkFg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"method\": 1,\r\n    \"value\" : 10000,\r\n    \"rate\": 0.5,\r\n    \"term\": 12,\r\n    \"rate_base_months\": 1,\r\n    \"start_date\": \"2021-02-01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/funding-calculator/simulate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"funding-calculator",
+						"simulate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contract",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaMi10YzlrUUtEb3VZU2xqM25HZENza0dWOXo1c2pEaUVaM0VUWjJCTlpJIn0.eyJleHAiOjE3MDg0MzIwOTMsImlhdCI6MTcwODQzMTc5MywianRpIjoiOGQzOTYyOGItZmI4Ni00ZDJhLTljNzQtMTA3YTg0NmQ1ZmE1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4OTg5L3JlYWxtcy9sb2FuIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImJiMmRhZjA4LTZkNmYtNDg2MC1hMDVmLTFiOGQxN2Y4NTg0NSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImE4ZDI1NDhkLWY1YTgtNGEwMi1iMTgxLTRlMWY0ZTc4ZDZjNSIsInNlc3Npb25fc3RhdGUiOiI3YzIwZjk5MS0yZTI5LTQ4MTEtYjYxZC00NjYxOGJlZGZiMGUiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1sb2FuIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiI3YzIwZjk5MS0yZTI5LTQ4MTEtYjYxZC00NjYxOGJlZGZiMGUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IlRlc3QgVXNlciIsInByZWZlcnJlZF91c2VybmFtZSI6InRlc3QtdXNlciIsImdpdmVuX25hbWUiOiJUZXN0IFVzZXIiLCJmYW1pbHlfbmFtZSI6IiIsImVtYWlsIjoidGVzdC11c2VyQGxvYW4uY29tIn0.VUqz7TgLk-oBhEo9BcXLrbR-1rcNrVXmpNpWfqYi_SxDwiblqG2rX_5tPuGayLklYy3SOhV-wxD_cHOORnxHGnT82WDIdf3raS_adaKPhxXhwjfpSdZwJ0R_pCzUlwJ7lBDafWyNzgCo3l46Bt26zcg-rx39qL4G8CzmkhleB7F2TwFHVv8-SexPSOVY17xdYshromkZ-oDhwnBlcxnxxhqMhTFuST9rSrd_gN3RZen24K-GU78q4sT2mO3L6Qa7Jj6YBzYf6mSM2h0ApI2DVSIZ4NwVF-81iWqwRriT30pQ0tAE0k7Pc0zlvgvK0YSrW1rwUVZUgnVIKwX22OBxCA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"method\": 1,\r\n    \"value\" : 10000,\r\n    \"rate\": 0.5,\r\n    \"term\": 12,\r\n    \"rate_base_months\": 1,\r\n    \"start_date\": \"2021-02-01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/funding-calculator/bb2daf08-6d6f-4860-a05f-1b8d17f85845/contract",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"funding-calculator",
+						"bb2daf08-6d6f-4860-a05f-1b8d17f85845",
+						"contract"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find By ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaMi10YzlrUUtEb3VZU2xqM25HZENza0dWOXo1c2pEaUVaM0VUWjJCTlpJIn0.eyJleHAiOjE3MDg0MzIwOTMsImlhdCI6MTcwODQzMTc5MywianRpIjoiOGQzOTYyOGItZmI4Ni00ZDJhLTljNzQtMTA3YTg0NmQ1ZmE1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4OTg5L3JlYWxtcy9sb2FuIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImJiMmRhZjA4LTZkNmYtNDg2MC1hMDVmLTFiOGQxN2Y4NTg0NSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImE4ZDI1NDhkLWY1YTgtNGEwMi1iMTgxLTRlMWY0ZTc4ZDZjNSIsInNlc3Npb25fc3RhdGUiOiI3YzIwZjk5MS0yZTI5LTQ4MTEtYjYxZC00NjYxOGJlZGZiMGUiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1sb2FuIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiI3YzIwZjk5MS0yZTI5LTQ4MTEtYjYxZC00NjYxOGJlZGZiMGUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IlRlc3QgVXNlciIsInByZWZlcnJlZF91c2VybmFtZSI6InRlc3QtdXNlciIsImdpdmVuX25hbWUiOiJUZXN0IFVzZXIiLCJmYW1pbHlfbmFtZSI6IiIsImVtYWlsIjoidGVzdC11c2VyQGxvYW4uY29tIn0.VUqz7TgLk-oBhEo9BcXLrbR-1rcNrVXmpNpWfqYi_SxDwiblqG2rX_5tPuGayLklYy3SOhV-wxD_cHOORnxHGnT82WDIdf3raS_adaKPhxXhwjfpSdZwJ0R_pCzUlwJ7lBDafWyNzgCo3l46Bt26zcg-rx39qL4G8CzmkhleB7F2TwFHVv8-SexPSOVY17xdYshromkZ-oDhwnBlcxnxxhqMhTFuST9rSrd_gN3RZen24K-GU78q4sT2mO3L6Qa7Jj6YBzYf6mSM2h0ApI2DVSIZ4NwVF-81iWqwRriT30pQ0tAE0k7Pc0zlvgvK0YSrW1rwUVZUgnVIKwX22OBxCA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/funding-calculator/bb2daf08-6d6f-4860-a05f-1b8d17f85845/find/68fd1f14-ade0-42c4-9f22-d0d743463efc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"funding-calculator",
+						"bb2daf08-6d6f-4860-a05f-1b8d17f85845",
+						"find",
+						"68fd1f14-ade0-42c4-9f22-d0d743463efc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find All",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaMi10YzlrUUtEb3VZU2xqM25HZENza0dWOXo1c2pEaUVaM0VUWjJCTlpJIn0.eyJleHAiOjE3MDg0MzIwOTMsImlhdCI6MTcwODQzMTc5MywianRpIjoiOGQzOTYyOGItZmI4Ni00ZDJhLTljNzQtMTA3YTg0NmQ1ZmE1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4OTg5L3JlYWxtcy9sb2FuIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImJiMmRhZjA4LTZkNmYtNDg2MC1hMDVmLTFiOGQxN2Y4NTg0NSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImE4ZDI1NDhkLWY1YTgtNGEwMi1iMTgxLTRlMWY0ZTc4ZDZjNSIsInNlc3Npb25fc3RhdGUiOiI3YzIwZjk5MS0yZTI5LTQ4MTEtYjYxZC00NjYxOGJlZGZiMGUiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1sb2FuIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiI3YzIwZjk5MS0yZTI5LTQ4MTEtYjYxZC00NjYxOGJlZGZiMGUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IlRlc3QgVXNlciIsInByZWZlcnJlZF91c2VybmFtZSI6InRlc3QtdXNlciIsImdpdmVuX25hbWUiOiJUZXN0IFVzZXIiLCJmYW1pbHlfbmFtZSI6IiIsImVtYWlsIjoidGVzdC11c2VyQGxvYW4uY29tIn0.VUqz7TgLk-oBhEo9BcXLrbR-1rcNrVXmpNpWfqYi_SxDwiblqG2rX_5tPuGayLklYy3SOhV-wxD_cHOORnxHGnT82WDIdf3raS_adaKPhxXhwjfpSdZwJ0R_pCzUlwJ7lBDafWyNzgCo3l46Bt26zcg-rx39qL4G8CzmkhleB7F2TwFHVv8-SexPSOVY17xdYshromkZ-oDhwnBlcxnxxhqMhTFuST9rSrd_gN3RZen24K-GU78q4sT2mO3L6Qa7Jj6YBzYf6mSM2h0ApI2DVSIZ4NwVF-81iWqwRriT30pQ0tAE0k7Pc0zlvgvK0YSrW1rwUVZUgnVIKwX22OBxCA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/funding-calculator/bb2daf08-6d6f-4860-a05f-1b8d17f85845/find-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"funding-calculator",
+						"bb2daf08-6d6f-4860-a05f-1b8d17f85845",
+						"find-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Metrics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/metrics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"metrics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER - Get Token - Password",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "default"
+						},
+						{
+							"key": "client_id",
+							"value": "a8d2548d-f5a8-4a02-b181-4e1f4e78d6c5",
+							"type": "default"
+						},
+						{
+							"key": "client_secret",
+							"value": "yM4I3yp37JWqYEIDsu9uCfdp8ecDBnzM",
+							"type": "default"
+						},
+						{
+							"key": "username",
+							"value": "test-user",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "test",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8989/realms/loan/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8989",
+					"path": [
+						"realms",
+						"loan",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADM - Get Token - Password Copy",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "default"
+						},
+						{
+							"key": "client_id",
+							"value": "a8d2548d-f5a8-4a02-b181-4e1f4e78d6c5",
+							"type": "default"
+						},
+						{
+							"key": "client_secret",
+							"value": "yM4I3yp37JWqYEIDsu9uCfdp8ecDBnzM",
+							"type": "default"
+						},
+						{
+							"key": "username",
+							"value": "test-user",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "test",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8989/realms/loan/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8989",
+					"path": [
+						"realms",
+						"loan",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Code Exchange",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8989/realms/loan/protocol/openid-connect/auth?response_type=code&client_id=a8d2548d-f5a8-4a02-b181-4e1f4e78d6c5&redirect_uri=http://localhost:3000&state=hx1ymdx&scope=openid profile&code_challenge=1dasVGd8-tauUHFQRDYmK1GSiuA-EZQqiZ0INS2wExY&code_challenge_method=S256",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8989",
+					"path": [
+						"realms",
+						"loan",
+						"protocol",
+						"openid-connect",
+						"auth"
+					],
+					"query": [
+						{
+							"key": "response_type",
+							"value": "code"
+						},
+						{
+							"key": "client_id",
+							"value": "a8d2548d-f5a8-4a02-b181-4e1f4e78d6c5"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:3000"
+						},
+						{
+							"key": "state",
+							"value": "hx1ymdx"
+						},
+						{
+							"key": "scope",
+							"value": "openid profile"
+						},
+						{
+							"key": "code_challenge",
+							"value": "1dasVGd8-tauUHFQRDYmK1GSiuA-EZQqiZ0INS2wExY"
+						},
+						{
+							"key": "code_challenge_method",
+							"value": "S256"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Token - Auth Code",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "default"
+						},
+						{
+							"key": "client_id",
+							"value": "a8d2548d-f5a8-4a02-b181-4e1f4e78d6c5",
+							"type": "default"
+						},
+						{
+							"key": "client_secret",
+							"value": "yM4I3yp37JWqYEIDsu9uCfdp8ecDBnzM",
+							"type": "default",
+							"disabled": true
+						},
+						{
+							"key": "code",
+							"value": "8132a802-d2b1-42c2-9026-e3b8c466959b.8951bbd5-0daf-49f8-8603-2b84eecf2c4c.569d2a24-7e2b-415d-b153-58569fb53d55",
+							"type": "default"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:3000",
+							"type": "default"
+						},
+						{
+							"key": "code_verifier",
+							"value": "iUU1btfj4j30dg_b60dz4m00DiBR0UNC-Lg8ra0foOc",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8989/realms/loan/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8989",
+					"path": [
+						"realms",
+						"loan",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

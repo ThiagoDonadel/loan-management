@@ -85,8 +85,8 @@ func (c *loanController) FIndAll(context *gin.Context) {
 }
 
 func (c *loanController) SetupRoutes(unauthorized, ownerAuthorized *gin.RouterGroup) {
-	unauthorized.POST("/simulate/", c.Simulate)
-	ownerAuthorized.POST("/contract/", c.Contract)
-	ownerAuthorized.GET("/find/:"+utils.RESOURCE_ID_PARAM_NAME+"/", c.Find)
-	ownerAuthorized.GET("/find-all/", c.FIndAll)
+	unauthorized.POST("/simulate", c.Simulate)
+	ownerAuthorized.POST("/contract", c.Contract)
+	ownerAuthorized.GET("/find/:"+utils.RESOURCE_ID_PARAM_NAME, c.Find)
+	ownerAuthorized.GET("/find-all", c.FIndAll)
 }

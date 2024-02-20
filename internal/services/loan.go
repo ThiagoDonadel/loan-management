@@ -55,7 +55,11 @@ func (s *loanService) Contract(loan model.Loan) (*model.Loan, error) {
 	}
 
 	loan.Values = values
-	s.repo.Create(&loan)
+	err = s.repo.Create(&loan)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &loan, nil
 }
